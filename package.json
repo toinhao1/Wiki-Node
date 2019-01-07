@@ -2,7 +2,7 @@
   "name": "blocipedia",
   "version": "1.0.0",
   "description": "A Wikipedia like application for users to create content.",
-  "main": "(src/server.js)",
+  "main": "src/server.js",
   "scripts": {
     "test": "export NODE_ENV=test && jasmine",
     "start": "node src/server.js"
@@ -22,6 +22,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
+    "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.7.1",
