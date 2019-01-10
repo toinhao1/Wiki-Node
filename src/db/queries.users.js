@@ -15,8 +15,8 @@ module.exports = {
       email: newUser.email,
       password: hashedPassword
     })
+    // Use SendGrid to have a confirmation email be sent to the users email.
     .then((user) => {
-      // Use SendGrid to have a confirmation email be sent to the users email.
       const msg = {
         to: newUser.email,
         from: 'test@example.com',
