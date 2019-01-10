@@ -28,6 +28,7 @@ module.exports = {
       callback(null, user);
       })
       .catch((err) => {
+        // console.log(err);
         callback(err);
       })
     }
