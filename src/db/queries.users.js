@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("./models").User;
 const bcrypt = require("bcryptjs");
 const sgMail = require('@sendgrid/mail');
@@ -10,7 +11,7 @@ module.exports = {
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(newUser.password, salt);
     return User.create({
-      username: newUser.username,
+      name: newUser.name,
       email: newUser.email,
       password: hashedPassword
     })
@@ -25,9 +26,9 @@ module.exports = {
       };
       sgMail.send(msg);
       callback(null, user);
-    })
-    .catch((err) => {
-      callback(err);
-    })
-  }
+      })
+      .catch((err) => {
+        callback(err);
+      })
+    }
  }
