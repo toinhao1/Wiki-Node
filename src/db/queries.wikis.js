@@ -6,9 +6,7 @@ const Wiki = require("./models").Wiki;
 module.exports = {
 
   getAllWikis(callback){
-    console.log("Hello")
-    return Wiki.all()
-
+    return Wiki.findAll()
     .then((wikis) => {
       callback(null, wikis);
     })
@@ -17,34 +15,35 @@ module.exports = {
     })
   },
   getWiki(id, callback){
-      return Wiki.findById(id)
-      .then((wiki) => {
-        callback(null, wiki);
-      })
-      .catch((err) => {
-        callback(err);
-      })
+    return Wiki.findById(id)
+    .then((wiki) => {
+      callback(null, wiki);
+    })
+    .catch((err) => {
+      callback(err);
+    })
   },
   addWiki(newWiki, callback){
-      return Wiki.create({
-          title: newWiki.title,
-          body: newWiki.body,
-          private: newWiki.private,
-          userId: newWiki.userId
-      })
-      .then((wiki) => {
-          callback(null, wiki);
-      })
-      .catch((err) => {
-          callback(err);
-      })
+    return Wiki.create({
+        title: newWiki.title,
+        body: newWiki.body,
+        private: newWiki.private,
+        userId: newWiki.userId
+    })
+    .then((wiki) => {
+        callback(null, wiki);
+    })
+    .catch((err) => {
+        callback(err);
+    })
   },
   updateWiki(id, updatedWiki, callback){
-    return Wiki.findById(id)
+      return Wiki.findById(id)
       .then((wiki) => {
           if(!wiki){
               return callback("Wiki not found");
           }
+
           wiki.update(updatedWiki, {
               fields: Object.keys(updatedWiki)
           })
@@ -56,6 +55,7 @@ module.exports = {
           });
       });
   },
+
   deleteWiki(id, callback){
       return Wiki.destroy({
           where: {id}
@@ -66,5 +66,5 @@ module.exports = {
       .catch((err) => {
           callback(err);
       })
-   }
+    }
 }
