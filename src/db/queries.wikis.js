@@ -43,7 +43,6 @@ module.exports = {
           if(!wiki){
               return callback("Wiki not found");
           }
-
           wiki.update(updatedWiki, {
               fields: Object.keys(updatedWiki)
           })

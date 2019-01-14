@@ -48,7 +48,7 @@ module.exports = {
     },
 
     update(req, res, next){
-        wikiQueries.updateWiki(req, req.body, (err, wiki) => {
+        wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
             if(err || wiki == null){
                 res.redirect(404, `/wikis/${req.params.id}/edit`);
             } else {
@@ -57,7 +57,7 @@ module.exports = {
         });
     },
     destroy(req, res, next){
-        wikiQueries.deleteWiki(req, (err, deletedWiki) => {
+        wikiQueries.deleteWiki(req.params.id, (err, deletedWiki) => {
             if(err){
               console.log(err)
               res.redirect(500, `/wikis/${req.params.id}`);
