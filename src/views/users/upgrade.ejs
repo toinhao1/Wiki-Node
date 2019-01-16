@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+
+        <main class="container">
+            <% include ../static/partials/messages.ejs %>
+
+            <% if(currentUser && currentUser.role == "standard") { %>
+        	    	<header class="jumbotron my-3">
+                  <h1 class="display-5">Upgrade to a premium asccount.</h1>
+        	    	  <p class="lead">Cancel anytime. Just $15 a month.</p>
+            		  <ul>
+              			<li>Create Private Wikis.</li>
+              			<li>Allow access to members you want to contribute to your wikis.</li>
+                    <li>Make the world a better place!</li>
+            		  </ul>
+        	    	</header>
+       	        <form action="/users/<%=currentUser.id%>/upgrade" method="POST">
+                	<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          			    data-key="pk_test_Kmp0JF4SWwO321REALbTSvXm"
+          			    data-amount="1500"
+          			    data-name="Blocipedia"
+          			    data-description="Blocipedia Premium Account"
+          			    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          			    data-locale="auto">
+                	</script>
+            	</form>
+            <% } else { %>
+              <% if(currentUser.role === "premium"); { %>
+            	<h1>Are you sure you want to downgrade your account?</h1>
+
+            	<form action="/users/<%=currentUser.id%>/downgrade" method="POST">
+                	<button type="submit" class="btn btn-danger">Downgrade your account</button>
+            	</form>
+       	      <% } %>
+       	    <% } %>
+        </main>
+        <% include ../static/partials/baseScripts.ejs %>
+    </body>
+</html>

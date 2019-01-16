@@ -1,5 +1,7 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
+const stripeKey = process.env.STRIPE_KEY;
+const stripe = require("stripe")("sk_test_mpdaymmx6L6rHmqGQ5tP18FE");
 
 module.exports = {
   create(req, res, next) {
@@ -17,7 +19,7 @@ module.exports = {
       } else {
         passport.authenticate("local")(req, res, () => {
           req.flash("notice", "You've successfully signed up!");
-          res.redirect("/")
+          res.redirect("/wikis")
         })
       }
     })
@@ -36,7 +38,7 @@ module.exports = {
        res.redirect("/users/sign_in");
      } else {
        req.flash("notice", "You've successfully signed in!");
-       res.redirect("/");
+       res.redirect("/wikis");
      }
    })
   },
@@ -44,5 +46,31 @@ module.exports = {
    req.logout();
    req.flash("notice", "You've successfully signed out!");
    res.redirect("/");
-  }
+   },
+   upgradeForm(req, res, next){
+      res.render("users/upgrade", {stripeKey});
+    },
+    upgrade(req, res, next){
+      let payment = 1500;
+      stripe.customers.create({
+        email: req.body.stripeEmail,
+        source:req.body.stripeToken,
+      }) .then((customer) => {
+        stripe.charges.create({
+          amount: payment,
+          description: "Blocipedia Premium Account Charge",
+          currency: "usd",
+          customer: customer.id,
+        })
+      }).then((charge) => {
+        userQueries.upgrade(req.user.dataValues.id);
+        req.flash("notice", "Your account is upgraded, you've been charged $15.00. Enjoy your premium account!");
+        res.redirect("/wikis");
+      })
+    },
+    downgrade(req, res, next){
+      userQueries.downgrade(req.user.dataValues.id);
+      req.flash("notice", "Your account has been downgraded, say goodbye to your premium features!");
+      res.redirect("/");
+    }
 }
