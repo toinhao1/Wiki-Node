@@ -56,7 +56,6 @@ module.exports = {
             }
         });
     },
-
     update(req, res, next){
         wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
             if(err || wiki == null){

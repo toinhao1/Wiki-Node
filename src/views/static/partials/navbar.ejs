@@ -18,9 +18,9 @@
             <a class="nav-link" href="/wikis">Wikis</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/users/downgrade">Downgrade</a>
+            <a class="nav-link" href="/users/downgrade">Downgrade Your Account</a>
           </li>
-        <% } else if (currentUser) { %>
+        <% } else if (currentUser && currentUser.role === "standard") { %>
           <li class="nav-item">
             <a class="nav-link" href="/users/sign_out">Sign out</a>
           </li>
@@ -28,7 +28,7 @@
             <a class="nav-link" href="/wikis">Wikis</a>
           </li>
           <li class="nav-item">
-             <a class="nav-link" href="/users/upgrade">Upgrade</a>
+             <a class="nav-link" href="/users/upgrade">Upgrade Your Account</a>
           </li>
         <% } else { %>
           <li class="nav-item">

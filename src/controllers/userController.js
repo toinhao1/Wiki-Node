@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const stripeKey = process.env.STRIPE_KEY;
 const stripe = require("stripe")("sk_test_mpdaymmx6L6rHmqGQ5tP18FE");
@@ -70,6 +71,7 @@ module.exports = {
     },
     downgrade(req, res, next){
       userQueries.downgrade(req.user.dataValues.id);
+      wikiQueries.downgradePrivateWikis(req.user.dataValues.id);
       req.flash("notice", "Your account has been downgraded, say goodbye to your premium features!");
       res.redirect("/");
     }
