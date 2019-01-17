@@ -13,6 +13,9 @@ module.exports = class ApplicationPolicy {
   _premiumAcct() {
     return this.user && this.user.role == "premium";
   }
+  _isOwner() {
+   return this.record && this.record.userId == "this.user.id";
+ }
   new() {
     return this.user != null;
   }
@@ -23,14 +26,21 @@ module.exports = class ApplicationPolicy {
     return true;
   }
   edit() {
-    return this.new() &&
-      this.record && (this._isOwner() || this._adminAcct());
-      this.record && (this._isOwner() || this._standardAcct());
+    if(this.record.private == false) {
+      return this.new() &&
+      this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
+    } else if (this.record.private == true) {
+      return this.new() &&
+      this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
+    }
   }
   update() {
     return this.edit();
   }
   destroy() {
     return this.update();
+  }
+  showCollaborators() {
+    return this.edit();
   }
 }

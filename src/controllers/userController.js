@@ -74,5 +74,16 @@ module.exports = {
       wikiQueries.downgradePrivateWikis(req.user.dataValues.id);
       req.flash("notice", "Your account has been downgraded, say goodbye to your premium features!");
       res.redirect("/");
+    },
+    showCollaborations(req, res, next){
+      userQueries.getUser(req.user.id, (err, result) => {
+        user = result["user"];
+        collaborations = result["collaborations"];
+        if(err || user == null){
+          res.redirect(404, "/");
+        } else {
+          res.render("users/collaborations", {user, collaborations});
+        }
+      });
     }
 }
