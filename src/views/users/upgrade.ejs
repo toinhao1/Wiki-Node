@@ -15,7 +15,7 @@
         	    	  <p class="lead">Cancel anytime. Just $15 a month.</p>
             		  <ul>
               			<li>Create Private Wikis.</li>
-              			<li>Allow access to members you want to contribute to your wikis.</li>
+              			<li>Allow access to members you want to collaborate.</li>
                     <li>Make the world a better place!</li>
             		  </ul>
         	    	</header>
@@ -31,11 +31,11 @@
             	</form>
             <% } else { %>
               <% if(currentUser.role === "premium") { %>
-            	<h1>Are you sure you want to downgrade your account? All of your private wiki's will be made public.</h1>
-
-            	<form action="/users/<%=currentUser.id%>/downgrade" method="POST">
-                	<button type="submit" class="btn btn-danger">Open my wiki's to the public!</button>
-            	</form>
+                <header class="jumbotron my-3">
+              	<h1>Are you sure you want to downgrade your account? All of your private wiki's will be made public.</h1>
+              	<form action="/users/<%=currentUser.id%>/downgrade" method="POST">
+                  	<button type="submit" class="btn btn-danger">Open my wiki's to the public!</button>
+              	</form>
        	      <% } %>
        	    <% } %>
         </main>

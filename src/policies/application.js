@@ -1,6 +1,6 @@
 module.exports = class ApplicationPolicy {
 
-  constructor(user, record) {
+  constructor(user, record, collaborators) {
     this.user = user;
     this.record = record;
   }
@@ -14,7 +14,7 @@ module.exports = class ApplicationPolicy {
     return this.user && this.user.role == "premium";
   }
   _isOwner() {
-   return this.record && this.record.userId == "this.user.id";
+   return this.record && this.record.userId == this.user.id;
  }
   new() {
     return this.user != null;
@@ -28,10 +28,10 @@ module.exports = class ApplicationPolicy {
   edit() {
     if(this.record.private == false) {
       return this.new() &&
-      this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
+      this.record && (this._standardAcct() || this._adminAcct() || this._premiumAcct());
     } else if (this.record.private == true) {
       return this.new() &&
-      this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
+      this.record && (this._standardAcct() || this._adminAcct() || this._premiumAcct());
     }
   }
   update() {

@@ -18,7 +18,10 @@
             <a class="nav-link" href="/wikis">Wikis</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/users/downgrade">Downgrade Your Account</a>
+            <a class="nav-link" href="/users/collaborations">Collaborations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/upgrade">Downgrade Your Account</a>
           </li>
         <% } else if (currentUser && currentUser.role === "standard") { %>
           <li class="nav-item">
@@ -26,6 +29,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/wikis">Wikis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/collaborations">Collaborations</a>
           </li>
           <li class="nav-item">
              <a class="nav-link" href="/users/upgrade">Upgrade Your Account</a>

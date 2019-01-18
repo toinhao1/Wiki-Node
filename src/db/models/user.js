@@ -28,6 +28,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "wikis"
     });
+    User.hasMany(models.Collaborator, {
+      foreignKey: "userId",
+      as: "collaborators"
+    });
+    User.prototype.isOwner = function() {
+      return this.role === "owner";
+    };
     User.prototype.standardAcct = function() {
       return this.role === "standard";
     };
