@@ -12,6 +12,6 @@
 * Bootstrap
 * JQuery
 
-Also utilized within the project was SendGrid for email confirmations, Express-validator for validations, Bcrypt.js for encryption, Stripe for payment processing and integration, Faker to seed the database and Heroku for deployment.
+Also utilized SendGrid for email confirmations, Express-validator for validations, Bcrypt.js for encryption, Stripe for payment processing and integration, Faker to seed the database and Heroku for deployment.
 
  Blocipedia-node was completed as part of [Bloc's](https://www.bloc.io/) Web Development Curriculum.
