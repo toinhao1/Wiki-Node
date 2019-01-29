@@ -1,4 +1,4 @@
-# Blocipedia-node
+# Wiki-Node
 
 #### Web application that allows users to create and collaborate on wiki's. 
 
